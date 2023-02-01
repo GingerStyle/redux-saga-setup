@@ -8,6 +8,9 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
+import firstReducer from './Reducers/firstReducer.js';
+import secondReducer from './Reducers/secondReducer.js';
+import elementListReducer from './Reducers/elementListReducer.js';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -33,34 +36,6 @@ function* postElement(action) {
         console.log('error in postElement', error);
     }
 }
-
-const firstReducer = (state = 0, action) => {
-    if (action.type === 'BUTTON_ONE') {
-        console.log('firstReducer state', state);
-        console.log('Button 1 was clicked!');
-        return state + 1;
-    }
-    return state;
-};
-
-const secondReducer = (state = 100, action) => {
-    if (action.type === 'BUTTON_TWO') {
-        console.log('secondReducer state', state);
-        console.log('Button 2 was clicked!');
-        return state - 1;
-    }
-    return state;
-};
-
-const elementListReducer = (state = [], action) => {
-    switch (action.type) {
-        case 'SET_ELEMENTS':
-            return action.payload;
-        default:
-            return state;
-    }
-};    
-
 
 
 // This is creating the store
